@@ -16,9 +16,18 @@ export default class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			sunsets: [],
-			waterfalls: [],
-			skyline: []
+			sunsets: {
+				set: [],
+				loaded: false
+			},
+			waterfalls: {
+				set: [],
+				loaded: false
+			},
+			skyline: {
+				set: [],
+				loaded: false
+			}
 		};
 	}
 
@@ -35,12 +44,25 @@ export default class App extends Component {
 	}
 
 	fetchPhotos = searchTerm => {
+
+		this.setState({
+			[searchTerm]: {
+				set: [],
+				loaded: false
+			}
+		})
+
 		const { key } = flickrAPI
 		const api = (`https://www.flickr.com/services/rest/?method=flickr.photos.search&per_page=24&format=json&nojsoncallback=1&safe_search=1&api_key=${key}&text=${searchTerm}`);
 
 		fetch(api)
 			.then(res => res.json())
-			.then(res => this.setState({ [searchTerm]: res.photos.photo }))
+			.then(res => this.setState({
+				[searchTerm]: {
+					set: res.photos.photo,
+					loaded: true
+				}
+			}))
 			.catch(err => console.error(err));
 	}
 
