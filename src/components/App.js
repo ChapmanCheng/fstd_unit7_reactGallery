@@ -1,6 +1,6 @@
 // Node modules
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 // Styles
 import "../styles/styles.css";
@@ -59,20 +59,24 @@ class App extends Component {
 	}
 
 	render() {
+		// * Iterate
 		const listOfKeys = Object.keys(this.state)
-		const listOfButtons = listOfKeys.map(key => <Route
+		const listOfButtons = listOfKeys.map((key, i) => <Route
 			path={`/${key}`}
 			key={i}
 			render={() => (
 				<PhotoContainer photos={this.state[key]} />
 			)}
 		/>)
+
+		// * Returned component
 		return (
 			<div className="container">
 				<Form handleSubmit={this.handleSubmit} />
 				<Nav categories={listOfKeys} />
 				<Switch>
-					<Route path="/" component={PhotoContainer} exact />
+					{/* the "/" path takes to the first state category */}
+					<Route exact path="/" render={() => <Redirect to={`/${listOfKeys[0]}`} />} />
 					{listOfButtons}
 					<Route component={NotFound} />
 				</Switch>
