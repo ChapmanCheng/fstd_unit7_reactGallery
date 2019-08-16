@@ -10,7 +10,7 @@ import Form from "./Form";
 import Nav from "./Nav";
 import PhotoContainer from "./PhotoContainer";
 import NotFound from "./NotFound";
-import { flickrAPI } from "./key/config";
+import { flickrAPI } from "./keys/config";
 
 class App extends Component {
 	constructor() {
