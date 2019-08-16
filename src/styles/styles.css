@@ -56,6 +56,9 @@ input {
     border-radius: 3px;
     padding: 5px;
     color: #fff;
+    
+    /**Custom css */
+    width: 100%; 
 }
 
 .main-nav .active,

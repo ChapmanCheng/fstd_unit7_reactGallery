@@ -2,16 +2,15 @@ import React from "react";
 
 import NavButton from "./NavButton";
 
-const Nav = props => {
-	return (
-		<nav className="main-nav">
-			<ul>
-				<NavButton name="cats" />
-				<NavButton name="dogs" />
-				<NavButton name="birds" />
-			</ul>
-		</nav>
-	);
+const Nav = ({ categories }) => {
+    const listOfButtons = categories.map(category => <NavButton name={category} />)
+    return (
+        <nav className="main-nav">
+            <ul>
+                {listOfButtons}
+            </ul>
+        </nav>
+    );
 };
 
 export default Nav;

@@ -16,9 +16,9 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			cats: [],
-			dogs: [],
-			birds: []
+			sunsets: [],
+			waterfalls: [],
+			skyline: []
 		};
 	}
 
@@ -35,14 +35,16 @@ class App extends Component {
 	}
 
 	fetchPhotos(searchTerm) {
-		fetch(
-			`https://www.flickr.com/services/rest/?method=flickr.photos.search
+		const api = (`
+			https://www.flickr.com/services/rest/?method=flickr.photos.search
 			&per_page=24
 			&format=json
 			&nojsoncallback=1
 			&api_key=${flickrAPI.key}
-			&text=${searchTerm}`
-		)
+			&text=${searchTerm}
+		`)
+
+		fetch(api)
 			.then(res => res.json())
 			.then(res => this.setState({ [searchTerm]: res.photos.photo }))
 			.catch(err => console.error(err));
@@ -57,30 +59,20 @@ class App extends Component {
 	}
 
 	render() {
+		const listOfKeys = Object.keys(this.state)
+		const listOfButtons = listOfKeys.map(key => <Route
+			path={`/${key}`}
+			render={() => (
+				<PhotoContainer photos={this.state[key]} />
+			)}
+		/>)
 		return (
 			<div className="container">
 				<Form handleSubmit={this.handleSubmit} />
-				<Nav />
+				<Nav categories={listOfKeys} />
 				<Switch>
 					<Route path="/" component={PhotoContainer} exact />
-					<Route
-						path="/cats"
-						render={() => (
-							<PhotoContainer photos={this.state.cats} />
-						)}
-					/>
-					<Route
-						path="/dogs"
-						render={() => (
-							<PhotoContainer photos={this.state.dogs} />
-						)}
-					/>
-					<Route
-						path="/birds"
-						render={() => (
-							<PhotoContainer photos={this.state.birds} />
-						)}
-					/>
+					{listOfButtons}
 					<Route component={NotFound} />
 				</Switch>
 			</div>
