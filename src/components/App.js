@@ -12,7 +12,7 @@ import PhotoContainer from "./PhotoContainer";
 import NotFound from "./NotFound";
 import { flickrAPI } from "./keys/config";
 
-class App extends Component {
+export default class App extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -71,7 +71,5 @@ class App extends Component {
 		);
 	}
 }
-
-export default App;
 
 // TODO: Need to add {Match}

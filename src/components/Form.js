@@ -4,7 +4,7 @@ import Redirect from 'react-router-dom'
 // assets
 import { ReactComponent as Logo } from "./assets/magnifier.svg";
 
-class Form extends Component {
+export default class Form extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -35,5 +35,3 @@ class Form extends Component {
 			</form>)
 	};
 };
-
-export default Form;
