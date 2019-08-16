@@ -62,6 +62,7 @@ class App extends Component {
 		const listOfKeys = Object.keys(this.state)
 		const listOfButtons = listOfKeys.map(key => <Route
 			path={`/${key}`}
+			key={i}
 			render={() => (
 				<PhotoContainer photos={this.state[key]} />
 			)}
