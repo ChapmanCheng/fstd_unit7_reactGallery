@@ -1,23 +1,17 @@
-import React from "react"
-import { NavLink } from "react-router-dom"
+import React from "react";
+
+import NavButton from "./NavButton";
 
 const Nav = props => {
-    return (
-        <nav className="main-nav">
-            <ul>
-                <li>
-                    <NavLink to="/cats">Cats</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/dogs">Dogs</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/birds">Birds</NavLink>
-                </li>
-            </ul>
-        </nav>
-    )
-}
+	return (
+		<nav className="main-nav">
+			<ul>
+				<NavButton name="cats" />
+				<NavButton name="dogs" />
+				<NavButton name="birds" />
+			</ul>
+		</nav>
+	);
+};
 
-export default Nav
-
+export default Nav;
