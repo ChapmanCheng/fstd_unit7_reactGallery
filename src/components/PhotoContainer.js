@@ -5,7 +5,7 @@ import NotFound from "./NotFound";
 const PhotoContainer = ({ photos }) => {
 	let listOfPhotos
 	if (!photos.loaded) {
-		listOfPhotos = <h5>Loading ...</h5>
+		listOfPhotos = <h2>Loading ...</h2>
 	} else if (photos.set.length > 0) {
 		listOfPhotos = photos.set.map(photo => <Photo photo={photo} key={photo.id} />);
 	} else {
