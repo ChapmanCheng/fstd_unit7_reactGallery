@@ -6,7 +6,8 @@ const Photo = ({ photo }) => {
 		<li>
 			<a
 				href={`https://www.flickr.com/photos/${owner}/${id}`}
-				target="_blank"
+			// ? Something is wrong with target=_blank
+			// target="_blank" 
 			>
 				<img
 					src={`https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`}
