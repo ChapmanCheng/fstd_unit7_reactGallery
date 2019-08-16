@@ -10,7 +10,7 @@ import Form from "./Form";
 import Nav from "./Nav";
 import PhotoContainer from "./PhotoContainer";
 import NotFound from "./NotFound";
-import flickrAPI from "./key/config";
+import { flickrAPI } from "./key/config";
 
 class App extends Component {
 	constructor() {
@@ -28,21 +28,38 @@ class App extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		for (const key in this.state) {
+			this.setState({ [key]: [] });
+		}
+	}
+
 	fetchPhotos(searchTerm) {
 		fetch(
-			`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${
-				flickrAPI.key
-			}&text=${searchTerm}&per_page=24&format=json&nojsoncallback=1`
+			`https://www.flickr.com/services/rest/?method=flickr.photos.search
+			&per_page=24
+			&format=json
+			&nojsoncallback=1
+			&api_key=${flickrAPI.key}
+			&text=${searchTerm}`
 		)
 			.then(res => res.json())
 			.then(res => this.setState({ [searchTerm]: res.photos.photo }))
 			.catch(err => console.error(err));
 	}
 
+	handleSubmit(e) {
+		e.preventDefault();
+		console.log(e.target.value);
+	}
+	handleChange(e) {
+		console.log(e);
+	}
+
 	render() {
 		return (
 			<div className="container">
-				<Form />
+				<Form handleSubmit={this.handleSubmit} />
 				<Nav />
 				<Switch>
 					<Route path="/" component={PhotoContainer} exact />
