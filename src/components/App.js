@@ -34,15 +34,9 @@ class App extends Component {
 		}
 	}
 
-	fetchPhotos(searchTerm) {
-		const api = (`
-			https://www.flickr.com/services/rest/?method=flickr.photos.search
-			&per_page=24
-			&format=json
-			&nojsoncallback=1
-			&api_key=${flickrAPI.key}
-			&text=${searchTerm}
-		`)
+	fetchPhotos = searchTerm => {
+		const { key } = flickrAPI
+		const api = (`https://www.flickr.com/services/rest/?method=flickr.photos.search&per_page=24&format=json&nojsoncallback=1&safe_search=1&api_key=${key}&text=${searchTerm}`);
 
 		fetch(api)
 			.then(res => res.json())
@@ -50,18 +44,11 @@ class App extends Component {
 			.catch(err => console.error(err));
 	}
 
-	handleSubmit(e) {
-		e.preventDefault();
-		console.log(e.target.value);
-	}
-	handleChange(e) {
-		console.log(e);
-	}
 
 	render() {
-		// * Iterate
-		const listOfKeys = Object.keys(this.state)
-		const listOfButtons = listOfKeys.map((key, i) => <Route
+		// * Iteration
+		const arrayOfStateKeys = Object.keys(this.state)
+		const listOfButtons = arrayOfStateKeys.map((key, i) => <Route
 			path={`/${key}`}
 			key={i}
 			render={() => (
@@ -72,11 +59,11 @@ class App extends Component {
 		// * Returned component
 		return (
 			<div className="container">
-				<Form handleSubmit={this.handleSubmit} />
-				<Nav categories={listOfKeys} />
+				<Form onSearch={this.fetchPhotos} />
+				<Nav categories={arrayOfStateKeys} />
 				<Switch>
 					{/* the "/" path takes to the first state category */}
-					<Route exact path="/" render={() => <Redirect to={`/${listOfKeys[0]}`} />} />
+					<Route exact path="/" render={() => <Redirect to={`/${arrayOfStateKeys[0]}`} />} />
 					{listOfButtons}
 					<Route component={NotFound} />
 				</Switch>
