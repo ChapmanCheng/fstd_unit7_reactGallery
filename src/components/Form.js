@@ -12,22 +12,23 @@ class Form extends Component {
 		}
 	}
 
+	handleChange = e => {
+		this.setState({ searchText: e.target.value }) // * this is async
+	}
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const searchText = e.currentTarget.firstElementChild.value
-		this.setState({ searchText }) // ! this is async
-		this.props.onSearch(searchText); // ! this script runs too fast and sent empty string to "onSearch()", so I use input.value instead
-		e.currentTarget.firstElementChild.value = ""
+		this.props.onSearch(this.state.searchText);
+		e.currentTarget.reset()
 
 		// TODO: Redirect to new page
-		
+
 	}
 
 	render() {
 		return (
 			<form className="search-form" onSubmit={this.handleSubmit}>
-				<input type="search" name="search" placeholder="Search" required />
+				<input type="search" name="search" placeholder="Search" onChange={this.handleChange} required />
 				<button type="submit" className="search-button">
 					<Logo />
 				</button>
