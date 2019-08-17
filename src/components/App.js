@@ -74,9 +74,7 @@ export default class App extends Component {
 		const listOfButtons = arrayOfStateKeys.map((key, i) => <Route
 			path={`/${key}`}
 			key={i}
-			render={() => (
-				<PhotoContainer photos={this.state[key]} />
-			)}
+			render={routeProps => <PhotoContainer photos={this.state[key]} {...routeProps} />}
 		/>)
 
 		// * Returned component

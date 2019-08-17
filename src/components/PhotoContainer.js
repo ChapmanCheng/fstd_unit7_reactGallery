@@ -15,7 +15,7 @@ const PhotoContainer = ({ photos }) => {
 	return (
 		<div className="photo-container">
 			<h2>Results</h2>
-			<ul>{listOfPhotos}</ul> :
+			<ul>{listOfPhotos}</ul>
 		</div>
 	);
 };
