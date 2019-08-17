@@ -16,31 +16,14 @@ export default class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			sunsets: {
-				set: [],
-				loading: true
-			},
-			waterfalls: {
-				set: [],
-				loading: true
-			},
-			skyline: {
-				set: [],
-				loading: true
-			}
+			photos: [],
+			categories: ["sunset", "waterfalls", "skyline"],
+			isLoading: true
 		};
 	}
 
-	componentDidMount() {
-		for (let key in this.state) {
-			this.fetchPhotos(key);
-		}
-	}
-
-	componentWillUnmount() {
-		for (const key in this.state) {
-			this.setState({ [key]: [] });
-		}
+	componentDidMount = () => {
+		this.fetchPhotos(this.state.categories[0])
 	}
 
 	fetchPhotos = searchTerm => {
@@ -50,33 +33,38 @@ export default class App extends Component {
 		fetch(api)
 			.then(res => res.json())
 			.then(res => this.setState({
-				[searchTerm]: {
-					set: res.photos.photo,
-					loading: false
-				}
+				photos: res.photos.photo,
+				isLoading: false
 			}))
 			.catch(err => console.error(err));
 	}
 
+	changePhotosSet = category => {
+		this.setState({
+			photos: [],
+			isLoading: true
+		})
+		this.fetchPhotos(category)
+	}
+
+	onSearch = searchText => {
+		const categories = this.state.categories
+		categories.push(searchText)
+		this.setState({ categories })
+		this.changePhotosSet(searchText)
+	}
 
 	render() {
-		// * Iteration
-		const arrayOfStateKeys = Object.keys(this.state)
-		const listOfButtons = arrayOfStateKeys.map((key, i) => <Route
-			path={`/${key}`}
-			key={i}
-			render={routeProps => <PhotoContainer photos={this.state[key]} {...routeProps} />}
-		/>)
+		const { categories, photos, isLoading } = this.state
 
 		// * Returned component
 		return (
 			<div className="container">
-				<Form onSearch={this.fetchPhotos} />
-				<Nav categories={arrayOfStateKeys} />
+				<Form onSearch={this.onSearch} />
+				<Nav categories={categories} changePhotosSet={this.changePhotosSet} />
 				<Switch>
-					{/* the "/" path takes to the first state category */}
-					<Route exact path="/" render={() => <Redirect to={`/${arrayOfStateKeys[0]}`} />} />
-					{listOfButtons}
+					<Route exact path="/" render={() => <Redirect to={`/${categories[0]}`} />} />
+					{categories.map((category, i) => <Route key={i} path={`/${category}`} render={() => <PhotoContainer photos={photos} isLoading={isLoading} />} />)}
 					<Route component={NotFound} />
 				</Switch>
 			</div>

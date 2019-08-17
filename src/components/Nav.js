@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink } from 'react-router-dom'
 
 
-const Nav = ({ categories }) => {
+const Nav = ({ categories, changePhotosSet }) => {
     // * Generate list array
     const listOfNav = categories.map((category, i) => {
         const capitalizedName = category[0].toUpperCase() + category.slice(1);
-        const navLink = <li key={i}><NavLink to={`/${category}`}>{capitalizedName}</NavLink></li>
+        const navLink = <li key={i}><NavLink to={`/${category}`} onClick={() => changePhotosSet(category)}>{capitalizedName}</NavLink></li>
         return navLink
     })
 

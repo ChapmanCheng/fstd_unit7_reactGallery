@@ -2,12 +2,13 @@ import React from "react";
 import Photo from "./Photo";
 import NotFound from "./NotFound";
 
-const PhotoContainer = ({ photos }) => {
+const PhotoContainer = ({ photos, isLoading }) => {
+
 	let listOfPhotos
-	if (photos.loading) {
+	if (isLoading) {
 		listOfPhotos = <h2>Loading ...</h2>
-	} else if (photos.set.length > 0) {
-		listOfPhotos = photos.set.map(photo => <Photo photo={photo} key={photo.id} />);
+	} else if (photos.length > 0) {
+		listOfPhotos = photos.map(photo => <Photo photo={photo} key={photo.id} />);
 	} else {
 		listOfPhotos = <NotFound />
 	}

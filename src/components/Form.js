@@ -28,7 +28,6 @@ export default class Form extends Component {
 				<input type="search" name="search" placeholder="Search" onChange={this.handleChange} required />
 				<button type="submit" className="search-button">
 					<Logo />
-					{/* <Redirect to={`/${this.state.searchText}`} /> */}
 				</button>
 			</form>)
 	};
