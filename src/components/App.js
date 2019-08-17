@@ -44,15 +44,6 @@ export default class App extends Component {
 	}
 
 	fetchPhotos = searchTerm => {
-		if (!this.state.hasOwnProperty(searchTerm)) {
-			this.setState({
-				[searchTerm]: {
-					set: [],
-					loading: true
-				}
-			})
-		}
-
 		const { key } = flickrAPI
 		const api = (`https://www.flickr.com/services/rest/?method=flickr.photos.search&per_page=24&format=json&nojsoncallback=1&safe_search=1&api_key=${key}&text=${searchTerm}`);
 
@@ -92,5 +83,3 @@ export default class App extends Component {
 		);
 	}
 }
-
-// TODO: Need to add {Match}

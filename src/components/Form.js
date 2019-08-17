@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Redirect from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 // assets
 import { ReactComponent as Logo } from "./assets/magnifier.svg";
@@ -20,9 +20,6 @@ export default class Form extends Component {
 		e.preventDefault();
 		this.props.onSearch(this.state.searchText);
 		e.currentTarget.reset()
-
-		// TODO: Redirect to new page
-
 	}
 
 	render() {
@@ -31,6 +28,7 @@ export default class Form extends Component {
 				<input type="search" name="search" placeholder="Search" onChange={this.handleChange} required />
 				<button type="submit" className="search-button">
 					<Logo />
+					{/* <Redirect to={`/${this.state.searchText}`} /> */}
 				</button>
 			</form>)
 	};

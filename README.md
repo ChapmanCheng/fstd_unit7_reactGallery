@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Welcome to my React Gallery Project 
 just run:
 ### `npm start`
-to initiate the project in dev mode 
+to initiate the project in dev mode on: http://localhost:3000
 <!-- ************************** -->
 
 ## Available Scripts
