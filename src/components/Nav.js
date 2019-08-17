@@ -1,13 +1,20 @@
 import React from "react";
+import { NavLink } from 'react-router-dom'
 
-import NavButton from "./NavButton";
 
 const Nav = ({ categories }) => {
-    const listOfButtons = categories.map((category, i) => <NavButton name={category} key={i} />)
+    // * Generate list array
+    const listOfNav = categories.map((category, i) => {
+        const capitalizedName = category[0].toUpperCase() + category.slice(1);
+        const navLink = <li key={i}><NavLink to={`/${category}`}>{capitalizedName}</NavLink></li>
+        return navLink
+    })
+
+    // * Render
     return (
         <nav className="main-nav">
             <ul>
-                {listOfButtons}
+                {listOfNav}
             </ul>
         </nav>
     );
