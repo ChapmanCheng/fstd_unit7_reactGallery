@@ -9,7 +9,7 @@ import "../styles/styles.css";
 import Form from "./Form";
 import Nav from "./Nav";
 import PhotoContainer from "./PhotoContainer";
-import NotFound from "./NotFound";
+import notFound404 from "./notFound404";
 import { flickrAPI } from "./keys/config";
 
 export default class App extends Component {
@@ -77,7 +77,7 @@ export default class App extends Component {
 					{/* the "/" path takes to the first state category */}
 					<Route exact path="/" render={() => <Redirect to={`/${arrayOfStateKeys[0]}`} />} />
 					{listOfButtons}
-					<Route component={NotFound} />
+					<Route component={notFound404} />
 				</Switch>
 			</div>
 		);
