@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom'
 
 // assets
 import { ReactComponent as Logo } from "./assets/magnifier.svg";
