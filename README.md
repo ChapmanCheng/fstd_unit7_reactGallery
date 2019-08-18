@@ -1,11 +1,24 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<!-- ************************** -->
+<!-- ! ************************** -->
 Welcome to my React Gallery Project 
-just run:
-### `npm start`
-to initiate the project in dev mode on: http://localhost:3000
-<!-- ************************** -->
+
+you need a Flickr API key to run this project, 
+please create a "config.js" file in
+
+### "./src/components/keys/config.js" 
+
+
+inside it you'll need the following lines
+
+# export const flickrAPI = { 
+#    key: "yourFlickrAPIKey",
+# }
+
+to run it, write the followings in your cli:
+### "npm install && npm start:
+to initiate the project in dev mode on: [http://localhost:3000]
+<!-- ! ************************** -->
 
 ## Available Scripts
 
